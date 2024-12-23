@@ -1,0 +1,21 @@
+name: PvP-Toggle
+version: '1.0.0'
+main: dev.acronical.pvptoggle.PvPToggle
+api-version: '1.21'
+author: Acronical
+description: A simple plugin that allows players to toggle PvP on and off.
+website: https://www.acronical.uk
+commands:
+    pvp:
+        description: Toggle PvP on and off.
+        usage: /pvp
+        permission: pvptoggle.pvptoggle
+        aliases:
+          - pvptoggle
+          - togglepvp
+          - pvp-toggle
+          - toggle-pvp
+permissions:
+    pvptoggle.pvptoggle:
+        description: Allows the player to toggle PvP on and off.
+        default: true
