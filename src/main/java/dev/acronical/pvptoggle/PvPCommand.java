@@ -28,7 +28,9 @@ public class PvPCommand implements CommandExecutor, TabCompleter {
         }
 
         if (strings.length == 0) {
-            commandSender.sendMessage("Usage: /pvp <on|off>");
+            boolean isEnabled = world.getPVP();
+            world.setPVP(!isEnabled);
+            commandSender.sendMessage("You have " + (isEnabled ? "disabled" : "enabled") + " PVP.");
             return true;
         }
 
