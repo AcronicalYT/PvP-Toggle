@@ -13,20 +13,23 @@ public final class PvPToggle extends JavaPlugin {
     @Override
     public void onEnable() {
         versionCheck();
-        getServer().getPluginManager().registerEvents(new PluginEvents(), this);
         getCommand("pvp").setExecutor(new PvPCommand());
-        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[PvPToggle] Plugin has been enabled!");
+        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[PvP Toggle] Plugin has been enabled!");
     }
 
     @Override
     public void onDisable() {
-        getServer().getConsoleSender().sendMessage(ChatColor.RED + "[PvPToggle] Plugin has been disabled!");
+        getServer().getConsoleSender().sendMessage(ChatColor.RED + "[PvP Toggle] Plugin has been disabled!");
     }
 
     private void versionCheck() {
         try {
             String latestVersion = getLatestVersion();
             if (!getDescription().getVersion().equals(latestVersion)) {
+                if (latestVersion.equals("An error occurred while checking for updates.")) {
+                    getServer().getConsoleSender().sendMessage(ChatColor.RED + "[PvP Toggle] An error occurred while checking for updates.");
+                    return;
+                }
                 getServer().getConsoleSender().sendMessage(ChatColor.YELLOW + "[PvP Toggle] A new version is available!");
                 getServer().getConsoleSender().sendMessage(ChatColor.YELLOW + "[PvP Toggle] Current version: " + getDescription().getVersion());
                 getServer().getConsoleSender().sendMessage(ChatColor.YELLOW + "[PvP Toggle] Latest version: " + latestVersion);
@@ -59,8 +62,7 @@ public final class PvPToggle extends JavaPlugin {
             } else {
                 throw new RuntimeException("Failed to check for updates. Response code: " + connection.getResponseCode() + " " + connection.getResponseMessage());
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
             return "An error occurred while checking for updates.";
         }
     }
